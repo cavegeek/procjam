@@ -23,17 +23,23 @@ function randomColor() {
 }
 
 window.onload = () => {
+  // This is what fraction of the sky gradient is below the image.
+  // Higher numbers make the sky gradient straighter.
+  const skycurve = Math.random()*0.5 + 0.5;
+
   let sky_g = document.getElementById("sky_g");
+  sky_g.setAttribute("cy", 1 / (1 - skycurve));
+  sky_g.setAttribute("r", 1 / (1 - skycurve));
   let offset = 100;
   for(let i = 0; i < Math.random()*6; ++i) {
-    offset -= Math.random()*(offset - 80);
+    offset -= Math.random()*(offset - skycurve*100);
     let stop = svgElem("stop");
     stop.setAttribute("offset", offset.toString() + "%");
     stop.setAttribute("stop-color", randomColor());
     sky_g.insertBefore(stop, sky_g.firstChild);
   }
   let stop = svgElem("stop");
-  stop.setAttribute("offset", "80%");
+  stop.setAttribute("offset", (skycurve*100).toString() + "%");
   stop.setAttribute("stop-color", randomColor());
   sky_g.insertBefore(stop, sky_g.firstChild);
   stop = svgElem("stop");
@@ -49,7 +55,7 @@ window.onload = () => {
      preserveAspectRatio="none"
      xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <radialGradient id="sky_g" cy="5" r="5">
+    <radialGradient id="sky_g">
     </radialGradient>
     <linearGradient id="water_g" x1="0" x2="0" y1="0" y2="1">
       <stop offset="0%" stop-color="black" />
