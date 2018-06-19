@@ -5,6 +5,7 @@
     padding: 0;
     overflow: hidden;
   }
+  div,
   svg {
     position: absolute;
     top: 0;
@@ -46,9 +47,21 @@ window.onload = () => {
   stop.setAttribute("offset", "100%");
   stop.setAttribute("stop-color", randomColor());
   sky_g.appendChild(stop);
+
+  let sun = document.getElementById("sun");
+  sun.setAttribute("cx", 50);
+  let r = 100*Math.random()*Math.random()*Math.random();
+  sun.setAttribute("cy", 30 + (20 + r)*Math.random());
+  sun.setAttribute("r", r);
+  sun.setAttribute("fill", "white");
+
+  let container = document.getElementById("container");
+  let sun_trans = document.getElementById("sun_trans");
+  sun_trans.setAttribute("transform", "scale(1, " + (container.clientWidth / container.clientHeight).toString() + ")")
 };
 
 </script>
+<div id="container"> <!-- only here to get aspect ratio -->
 <svg id="image"
      baseProfile="full"
      viewBox="0 0 100 100"
@@ -64,5 +77,9 @@ window.onload = () => {
     </linearGradient>
   </defs>
   <rect id="sky" x="0" y="0" width="100" height="60" fill="url(#sky_g)" />
+  <g id="sun_trans">
+    <circle id="sun" />
+  </g>
   <rect id="water" x="0" y="60" width="100" height="40" fill="url(#water_g)" />
 </svg>
+</div>
