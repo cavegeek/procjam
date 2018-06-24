@@ -60,7 +60,7 @@ function randomize() {
 
   let container = document.getElementById("container");
   let sun_trans = document.getElementById("sun_trans");
-  sun_trans.setAttribute("transform", "scale(1, " + (container.clientWidth / container.clientHeight).toString() + ")");
+  sun_trans.setAttribute("transform", "translate(50 0) scale(" + (container.clientHeight / container.clientWidth).toString() + " 1) translate(-50 0)");
 
   document.getElementById("turb").setAttribute("seed", Math.floor(Math.random()*5000).toString());
 };
