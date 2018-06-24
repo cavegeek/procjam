@@ -23,12 +23,15 @@ function randomColor() {
   return "#" + Math.floor(Math.random()*256*256*256).toString(16).padStart(6, "0");
 }
 
-window.onload = () => {
+function randomize() {
   // This is what fraction of the sky gradient is below the image.
   // Higher numbers make the sky gradient straighter.
   const skycurve = Math.random()*0.5 + 0.5;
 
   let sky_g = document.getElementById("sky_g");
+  while(sky_g.firstChild) {
+    sky_g.removeChild(sky_g.firstChild);
+  }
   sky_g.setAttribute("cy", 1 / (1 - skycurve));
   sky_g.setAttribute("r", 1 / (1 - skycurve));
   let offset = 100;
@@ -60,8 +63,10 @@ window.onload = () => {
   sun_trans.setAttribute("transform", "scale(1, " + (container.clientWidth / container.clientHeight).toString() + ")")
 };
 
+window.onload = randomize;
+
 </script>
-<div id="container"> <!-- only here to get aspect ratio -->
+<div id="container" onclick="randomize()"> <!-- only here to get aspect ratio -->
 <svg id="image"
      baseProfile="full"
      viewBox="0 0 100 100"
