@@ -36,9 +36,11 @@ function randomize() {
   }
   sky_g.setAttribute("cy", 1 / (1 - skycurve));
   sky_g.setAttribute("r", 1 / (1 - skycurve));
+  let skyColors = Math.random()*6;
+  let skyBottom = skycurve*100 + 40*(1 - skycurve);
   let offset = 100;
-  for(let i = 0; i < Math.random()*6; ++i) {
-    offset -= Math.random()*(offset - skycurve*100);
+  for(let i = 0; i < skyColors; ++i) {
+    offset -= Math.random()*(offset - skyBottom)/4 + (offset - skyBottom)/4;
     let stop = svgElem("stop");
     stop.setAttribute("offset", offset.toString() + "%");
     stop.setAttribute("stop-color", randomColor());
